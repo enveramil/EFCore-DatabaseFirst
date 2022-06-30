@@ -12,6 +12,6 @@ using (var _context = new EFCoreDatabaseFirstContext())
     // Tüm verileri foreach ile ekrana yazdıracağız.
     products.ForEach(p =>
     {
-        Console.WriteLine($"{p.id}: {p.Name}: {p.Price}: {p.Stock}");
+        Console.WriteLine($"{p.Id}: {p.Name}: {p.Price}: {p.Stock}");
     });
 }
