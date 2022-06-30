@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 DbContextInitializer.Build();
 
 
-using (var _context = new AppDbContext(DbContextInitializer.OptionsBuilder.Options))
+using (var _context = new AppDbContext())
 {
     // using kullanılmasının sebebi işlem sonucunda memory den dispose olunur.
     var products = await _context.Products.ToListAsync();
@@ -13,7 +13,7 @@ using (var _context = new AppDbContext(DbContextInitializer.OptionsBuilder.Optio
     // Tüm verileri foreach ile ekrana yazdıracağız.
     products.ForEach(p =>
     {
-        Console.WriteLine($"{p.id}: {p.Name}: {p.Price}");
+        Console.WriteLine($"{p.id}: {p.Name}: {p.Price}: {p.Stock}");
     });
 
 }

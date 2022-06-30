@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,12 @@ namespace EFCore.DatabaseFirst.DataAccessLayer
 {
     public class AppDbContext : DbContext
     {
-        private DbContextOptionsBuilder<AppDbContext> optionsBuilder;
+        private DbContextOptionsBuilder<AppDbContext> OptionsBuilder;
 
         // Products tablosunu DbSet olarak belirtmek gerekmektedir.
         // Veritabanındaki tablo ismi ile fonksiyon ismi aynı olursa EFCore otomatik olarak ilişki kurmaktadır.
         // Product isminde generic sınıf DbSet içerisinde tutulmaktadır.
+        // Aynı context üzerinden farklı db lere bağlantı sağlanabilir.
         public DbSet<Product> Products { get; set; }
 
         public AppDbContext()
@@ -29,8 +31,14 @@ namespace EFCore.DatabaseFirst.DataAccessLayer
 
         public AppDbContext(DbContextOptionsBuilder<AppDbContext> optionsBuilder)
         {
-            this.optionsBuilder = optionsBuilder;
+            this.OptionsBuilder = optionsBuilder;
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(DbContextInitializer.Configuration.GetConnectionString("SqlCon"));
+        }
+
 
         /* protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
          {

@@ -61,3 +61,4 @@ C:\Users\Enver\source\repos\EFCore\EFCore.DatabaseFirst\bin\Debug\net6.0\Microso
 C:\Users\Enver\source\repos\EFCore\EFCore.DatabaseFirst\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Abstractions.dll
 C:\Users\Enver\source\repos\EFCore\EFCore.DatabaseFirst\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Physical.dll
 C:\Users\Enver\source\repos\EFCore\EFCore.DatabaseFirst\bin\Debug\net6.0\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Users\Enver\source\repos\EFCore\EFCore.DatabaseFirst\bin\Debug\net6.0\DataAccessLayer\DbContextInitializer.cs
