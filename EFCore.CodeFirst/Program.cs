@@ -9,8 +9,8 @@ DbContextInitializer.Build();
 using (var _context = new AppDbContext())
 {
     // Track edilmeyen datalar da Update() kullanılır.
-    var product = new Product() { Id=3,Name="Seat LEon FR", Price=900000,Stock=1,Barcode=20190816};
-    _context.Update(product);
+    //var product = new Product() { Id=3,Name="Seat LEon FR", Price=900000,Stock=1,Barcode=20190816};
+    //_context.Update(product);
 
     //var products = await _context.Products.FirstAsync();
     //Console.WriteLine(products.Name);
@@ -20,12 +20,8 @@ using (var _context = new AppDbContext())
     //products.Stock = 10;
     //products.Name = "abcd";
 
-    await _context.SaveChangesAsync();
+    //await _context.SaveChangesAsync();
     //Console.WriteLine($"Son state: {_context.Entry(products).State}"); // unchanged
-
-
-
-
 
 
     //var newProduct = new Product() {Name = "Leon fr", Price = 800000, Stock = 5, Barcode = 555555 };
@@ -51,5 +47,65 @@ using (var _context = new AppDbContext())
     //});
 
     //_context.SaveChanges();
+
+
+
+    //var products = await _context.Products.AsNoTracking().ToListAsync();
+
+    //products.ForEach(p =>
+    //{
+    //    p.Stock += 100;
+    //});
+
+    // Memory de track edilen datalara erişim sağlayacağız.
+
+
+    // VERİ KAYDETME İŞLEMİ YAPILACAK
+
+    //_context.Products.Add(new() { Name="Iphone 11 64GB", Price=15000,Stock=47,Barcode=11111});
+    //_context.Products.Add(new() { Name = "Iphone 12 64GB", Price = 18000, Stock = 20, Barcode = 22222 });
+    //_context.Products.Add(new() { Name = "Iphone 13 128GB", Price = 21000, Stock = 34, Barcode = 33333 });
+
+    //Console.WriteLine($"Context Id : {_context.ContextId}");
+    
+
+    //_context.SaveChanges();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
