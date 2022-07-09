@@ -9,9 +9,7 @@ namespace EFCore.CodeFirst.Relationships.DAL
 {
     public class ProductFeature
     {
-        // one-to-one ilişkide child
-
-
+        [ForeignKey("Product")]
         public int Id { get; set; }
 
         public int Width { get; set; }
@@ -20,8 +18,7 @@ namespace EFCore.CodeFirst.Relationships.DAL
 
         public string Color { get; set; }
 
-        // navigation property
-        //public Product Product { get; set; }
+        public Product Product { get; set; }
 
     }
 }

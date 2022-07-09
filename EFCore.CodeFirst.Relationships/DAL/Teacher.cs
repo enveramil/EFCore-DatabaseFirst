@@ -13,7 +13,7 @@ namespace EFCore.CodeFirst.Relationships.DAL
         public string Name { get; set; }
 
         // Navigation Property
-        public List<Student> Students { get; set; }
+        public List<Student> Students { get; set; } = new();
 
     }
 }

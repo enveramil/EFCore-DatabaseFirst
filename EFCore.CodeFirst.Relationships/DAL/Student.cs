@@ -15,7 +15,8 @@ namespace EFCore.CodeFirst.Relationships.DAL
         public int Age { get; set; }
 
         // Navigation Property
-        public List<Teacher> Teachers { get; set; }
+        // null hatası almamak için initialize edildi.
+        public List<Teacher> Teachers { get; set; } = new();
 
     }
 }

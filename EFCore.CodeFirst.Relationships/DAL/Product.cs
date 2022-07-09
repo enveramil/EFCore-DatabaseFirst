@@ -19,12 +19,9 @@ namespace EFCore.CodeFirst.Relationships.DAL
 
         public int Barcode { get; set; }
 
-        public DateTime? CreatedDate { get; set; }
-
-        //public int Category_Id { get; set; }
-
-        // Navigation Property
-        //public Category Category { get; set; }
+        // Foreign Key
+        public int? CategoryId { get; set; }
+        public Category? CarBrands { get; set; }
 
         //public ProductFeature ProductFeature { get; set; }
 

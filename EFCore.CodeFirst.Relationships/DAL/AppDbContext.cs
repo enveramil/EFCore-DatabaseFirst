@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentAssertions.Common;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -10,13 +11,15 @@ namespace EFCore.CodeFirst.Relationships.DAL
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Product> CarModel { get; set; }
 
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<Category> CarBrands { get; set; }
 
-        public DbSet<Student> Students { get; set; }
+        //public DbSet<ProductFeature> ProductFeatures { get; set; }
 
-        public DbSet<Teacher> Teachers { get; set; }
+        //public DbSet<Student> Students { get; set; }
+
+        //public DbSet<Teacher> Teachers { get; set; }
 
         public AppDbContext() { }
 
@@ -25,7 +28,7 @@ namespace EFCore.CodeFirst.Relationships.DAL
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             DbContextInitializer.Build();
-            optionsBuilder.UseSqlServer(DbContextInitializer.Configuration.GetConnectionString("SqlCon"));
+            optionsBuilder.UseSqlServer("Data Source=DESKTOP-DB9C9K6\\SQLEXPRESS;Initial Catalog=CodeFirstRelationships;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -37,12 +40,16 @@ namespace EFCore.CodeFirst.Relationships.DAL
             //modelBuilder.Entity<Product>().HasOne(x => x.ProductFeature).WithOne(x => x.Product).HasForeignKey<ProductFeature>(x => x.Id);
 
 
-            modelBuilder.Entity<Student>().HasMany(x => x.Teachers).WithMany(x => x.Students)
-                .UsingEntity<Dictionary<string, object>>(
-                    "StudentTeacherManyToMany",
-                    x => x.HasOne<Teacher>().WithMany().HasForeignKey("Teacher_Id").HasConstraintName("FK_TeacherId"),
-                    x => x.HasOne<Student>().WithMany().HasForeignKey("Student_Id").HasConstraintName("FK_StudentId")
-                    );
+            //modelBuilder.Entity<Student>().HasMany(x => x.Teachers).WithMany(x => x.Students)
+            //    .UsingEntity<Dictionary<string, object>>(
+            //        "StudentTeacherManyToMany",
+            //        x => x.HasOne<Teacher>().WithMany().HasForeignKey("Teacher_Id").HasConstraintName("FK_TeacherId"),
+            //        x => x.HasOne<Student>().WithMany().HasForeignKey("Student_Id").HasConstraintName("FK_StudentId")
+            //        );
+
+
+            modelBuilder.Entity<Category>().HasMany(x => x.CarModel).WithOne(x => x.CarBrands).HasForeignKey(x => x.CategoryId)
+                .OnDelete(DeleteBehavior.SetNull); 
 
 
 

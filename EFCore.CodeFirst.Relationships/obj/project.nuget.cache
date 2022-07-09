@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "mgBcqbFGMMKR5uzz5eVSLZGzkr8zW74WzvBpd0n1GF0z775s1HIn2p+0Nv7P6D7elTpG6MTtBWXEqQwAtgBHXA==",
+  "dgSpecHash": "sRNV8hIFkjQ577zEYtPSjzSUgGHwJ0AuwzLMJYsOOXZBBgN+924lcX9749HKOofz88DUJk1ua6imOv37tbCVyg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Enver\\source\\repos\\EFCore\\EFCore.CodeFirst.Relationships\\EFCore.CodeFirst.Relationships.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Enver\\.nuget\\packages\\fluentassertions\\6.7.0\\fluentassertions.6.7.0.nupkg.sha512",
     "C:\\Users\\Enver\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Enver\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Enver\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",

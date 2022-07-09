@@ -62,3 +62,4 @@ C:\Users\Enver\source\repos\EFCore\EFCore.CodeFirst.Relationships\obj\Debug\net6
 C:\Users\Enver\source\repos\EFCore\EFCore.CodeFirst.Relationships\obj\Debug\net6.0\EFCore.CodeFirst.Relationships.pdb
 C:\Users\Enver\source\repos\EFCore\EFCore.CodeFirst.Relationships\obj\Debug\net6.0\EFCore.CodeFirst.Relationships.genruntimeconfig.cache
 C:\Users\Enver\source\repos\EFCore\EFCore.CodeFirst.Relationships\obj\Debug\net6.0\ref\EFCore.CodeFirst.Relationships.dll
+C:\Users\Enver\source\repos\EFCore\EFCore.CodeFirst.Relationships\bin\Debug\net6.0\FluentAssertions.dll
