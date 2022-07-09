@@ -13,7 +13,7 @@ namespace EFCore.CodeFirst.Relationships.DAL
     {
         public DbSet<Product> CarModel { get; set; }
 
-        public DbSet<Category> CarBrands { get; set; }
+        //public DbSet<Category> CarBrands { get; set; }
 
         //public DbSet<ProductFeature> ProductFeatures { get; set; }
 
@@ -48,11 +48,11 @@ namespace EFCore.CodeFirst.Relationships.DAL
             //        );
 
 
-            modelBuilder.Entity<Category>().HasMany(x => x.CarModel).WithOne(x => x.CarBrands).HasForeignKey(x => x.CategoryId)
-                .OnDelete(DeleteBehavior.SetNull); 
+            //modelBuilder.Entity<Category>().HasMany(x => x.CarModel).WithOne(x => x.CarBrands).HasForeignKey(x => x.CategoryId)
+            //    .OnDelete(DeleteBehavior.SetNull); 
 
 
-
+            modelBuilder.Entity<Product>().Property(x => x.PriceKdv).HasComputedColumnSql("[Price]/[Kdv]");
 
             base.OnModelCreating(modelBuilder);
         }
