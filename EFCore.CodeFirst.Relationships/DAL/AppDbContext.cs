@@ -11,11 +11,11 @@ namespace EFCore.CodeFirst.Relationships.DAL
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Product> CarModel { get; set; }
+        public DbSet<Product> Products { get; set; }
 
-        //public DbSet<Category> CarBrands { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
-        //public DbSet<ProductFeature> ProductFeatures { get; set; }
+        public DbSet<ProductFeature> ProductFeatures { get; set; }
 
         //public DbSet<Student> Students { get; set; }
 
@@ -52,8 +52,13 @@ namespace EFCore.CodeFirst.Relationships.DAL
             //    .OnDelete(DeleteBehavior.SetNull); 
 
 
-            modelBuilder.Entity<Product>().Property(x => x.PriceKdv).HasComputedColumnSql("[Price]/[Kdv]");
+            //modelBuilder.Entity<Product>().Property(x => x.PriceKdv).HasComputedColumnSql("[Price]/[Kdv]");
 
+            //modelBuilder.Entity<Product>().Property(x => x.PriceKdv).ValueGeneratedOnAddOrUpdate(); // computed
+            //modelBuilder.Entity<Product>().Property(x => x.Id).ValueGeneratedNever(); //None
+            //modelBuilder.Entity<Product>().Property(x => x.Id).ValueGeneratedOnAdd(); //identity  
+
+            //modelBuilder.Entity<Product>().Property(x => x.Price).HasPrecision(18, 2);
             base.OnModelCreating(modelBuilder);
         }
 

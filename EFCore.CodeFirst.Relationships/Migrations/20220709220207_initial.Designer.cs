@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCore.CodeFirst.Relationships.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220709152747_initial")]
+    [Migration("20220709220207_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,6 +22,23 @@ namespace EFCore.CodeFirst.Relationships.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("EFCore.CodeFirst.Relationships.DAL.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
 
             modelBuilder.Entity("EFCore.CodeFirst.Relationships.DAL.Product", b =>
                 {
@@ -46,15 +63,45 @@ namespace EFCore.CodeFirst.Relationships.Migrations
 
                     b.Property<decimal>("PriceKdv")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("decimal(18,2)")
-                        .HasComputedColumnSql("[Price]/[Kdv]");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CarModel");
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("EFCore.CodeFirst.Relationships.DAL.ProductFeature", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Height")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Width")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductFeatures");
+                });
+
+            modelBuilder.Entity("EFCore.CodeFirst.Relationships.DAL.ProductFeature", b =>
+                {
+                    b.HasOne("EFCore.CodeFirst.Relationships.DAL.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 #pragma warning restore 612, 618
         }

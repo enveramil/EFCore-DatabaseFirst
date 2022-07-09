@@ -13,7 +13,7 @@ namespace EFCore.CodeFirst.Relationships.DAL
         public string Name { get; set; }
 
         // null exception engellemek için initialize işlemi yapıldı.
-        //public List<Product> CarModel { get; set; } = new List<Product>();
+        public List<Product> Products { get; set; } = new List<Product>();
 
         
     }
