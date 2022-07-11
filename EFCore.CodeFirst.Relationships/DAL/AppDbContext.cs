@@ -11,11 +11,17 @@ namespace EFCore.CodeFirst.Relationships.DAL
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Product> Products { get; set; }
+        public DbSet<BasePerson> Person { get; set; }
+        public DbSet<Manager> Managers { get; set; }
 
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
-        public DbSet<ProductFeature> ProductFeatures { get; set; }
+
+        //public DbSet<Product> Products { get; set; }
+
+        //public DbSet<Category> Categories { get; set; }
+
+        //public DbSet<ProductFeature> ProductFeatures { get; set; }
 
         //public DbSet<Student> Students { get; set; }
 
@@ -27,6 +33,9 @@ namespace EFCore.CodeFirst.Relationships.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            // Trace, Debug, Information, Warning, Error, Criticial
+            // .LogTo(Console.WriteLine,Microsoft.Extensions.Logging.LogLevel.Information).UseLazyLoadingProxies()
+
             DbContextInitializer.Build();
             optionsBuilder.UseSqlServer("Data Source=DESKTOP-DB9C9K6\\SQLEXPRESS;Initial Catalog=CodeFirstRelationships;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }

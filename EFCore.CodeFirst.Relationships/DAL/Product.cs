@@ -27,9 +27,9 @@ namespace EFCore.CodeFirst.Relationships.DAL
 
         // Foreign Key
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
-        public ProductFeature ProductFeature { get; set; }
+        public virtual ProductFeature ProductFeature { get; set; }
 
         // Identity : update sorguları dahil etmez.
         // Computed : update ve add dahil etmez.

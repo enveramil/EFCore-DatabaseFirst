@@ -83,12 +83,63 @@ using (var dbContext = new AppDbContext())
     //    Console.WriteLine($"{categoryWithProducts.Name} {product.Name} {product.ProductFeature.Color}");
     //});
 
-    var product = dbContext.Products.Include(x => x.ProductFeature).Include(x=>x.Category).ToList();
+    //var product = dbContext.Products.Include(x => x.ProductFeature).Include(x=>x.Category).ToList();
 
-    product.ForEach(x =>
+    //product.ForEach(x =>
+    //{
+    //    Console.WriteLine($"{x.Name} {x.ProductFeature.Color} {x.Category.Name}");
+    //});
+
+
+    //var products = dbContext.Products.First();
+    //var category = dbContext.Categories.First();   
+
+    //if (true)
+    //{
+    //    // Navigation Propertyler üzerinden dataları çekmek daha verimlidir. 
+
+    //    dbContext.Entry(category).Collection(x => x.Products).Load();
+    //    dbContext.Entry(products).Reference(x => x.ProductFeature).Load();
+    //}
+
+
+    //var category = await dbContext.Categories.FirstAsync();
+    //Console.WriteLine("Category verileri çekildi.");
+
+
+    //var products = category.Products;
+
+    //Console.WriteLine("Products verileri çekildi.");
+
+    //var prodcuct = await dbContext.Products.FirstAsync();
+
+    //var productFeature = prodcuct.ProductFeature;
+
+
+    //var manager = dbContext.Person.Add(new Manager() { FirstName = "Özer", LastName = "Karagöl", Age = 45, Degree = 1 });
+
+    //var employee = dbContext.Person.Add(new Employee() { FirstName = "Birsen", LastName = "Karagöl", Age = 40, Salary = 40000 });
+
+
+    var persons = dbContext.Person.ToList();
+
+    persons.ForEach(p =>
     {
-        Console.WriteLine($"{x.Name} {x.ProductFeature.Color} {x.Category.Name}");
+        switch (p)
+        {
+            case Manager manager:
+                Console.WriteLine($"{manager.Degree}");
+                break;
+            case Employee employee:
+                Console.WriteLine($"{employee.Salary}");
+                break;
+            default:
+                break;
+        }
     });
+    
+    dbContext.SaveChanges();
+
 
 
 
