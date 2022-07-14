@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace EFCore.CodeFirst.Relationships.DAL
 {
-    public class Manager : BasePerson
+    public class Manager
     {
+        public int Id { get; set; }
+
+        public Person Person { get; set; }
         public int Degree { get; set; }
     }
 }

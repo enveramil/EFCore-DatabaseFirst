@@ -121,24 +121,79 @@ using (var dbContext = new AppDbContext())
     //var employee = dbContext.Person.Add(new Employee() { FirstName = "Birsen", LastName = "Karagöl", Age = 40, Salary = 40000 });
 
 
-    var persons = dbContext.Person.ToList();
+    //var manager = dbContext.Managers.ToList();
 
-    persons.ForEach(p =>
-    {
-        switch (p)
-        {
-            case Manager manager:
-                Console.WriteLine($"{manager.Degree}");
-                break;
-            case Employee employee:
-                Console.WriteLine($"{employee.Salary}");
-                break;
-            default:
-                break;
-        }
-    });
-    
-    dbContext.SaveChanges();
+    //var employee = dbContext.Employees.ToList();
+
+    //var persons = dbContext.Person.ToList();
+
+    //persons.ForEach(p =>
+    //{
+    //    switch (p)
+    //    {
+    //        case Manager manager:
+    //            Console.WriteLine($"{manager.Degree}");
+    //            break;
+    //        case Employee employee:
+    //            Console.WriteLine($"{employee.Salary}");
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //});
+
+
+    //dbContext.Person.Add(new Manager() { FirstName = "Ahsen", LastName="Amil", Age=24,Degree=9});
+
+    //dbContext.Person.Add(new Employee() { FirstName = "Elif Beren", LastName = "Amil", Age = 24, Salary=3000 });
+
+    //dbContext.Managers.Add(new Manager() { FirstName = "Enver", LastName = "Amil", Age = 23, Degree = 10 });
+    //dbContext.Employees.Add(new Employee() { FirstName = "Ahmet", LastName = "Amil", Age = 23, Salary = 5000 });
+
+    //dbContext.SaveChanges();
+
+
+    //var category = new Category() { Name = "Arabalar" };
+
+    //category.Products.Add(new()
+    //{
+    //    Name = "BMW", Stock = 1, Price = 500000, Barcode = 20220714, ProductFeature = new ProductFeature()
+    //    {
+    //        Color = "Black", Height=100, Width=100
+    //    }
+    //});
+
+    //category.Products.Add(new()
+    //{
+    //    Name = "Mercedes",
+    //    Stock = 1,
+    //    Price = 300000,
+    //    Barcode = 20220714,
+    //    ProductFeature = new ProductFeature()
+    //    {
+    //        Color = "Red",
+    //        Height = 100,
+    //        Width = 100
+    //    }
+    //});
+
+    //dbContext.Categories.Add(category);
+    //dbContext.SaveChanges();
+
+    var personList = dbContext.People.ToList();
+
+
+    var productFulls = dbContext.ProductFulls.FromSqlRaw(
+        @"select p.Id, c.Name 'CategoryName', p.Name, p.Price, pf.Height from Products p 
+        join ProductFeatures pf on p.Id = pf.Id
+        join Categories c on c.Id = p.CategoryId"
+
+        ).ToList();
+
+    Console.WriteLine("İşlem bitti...");
+
+
+
 
 
 

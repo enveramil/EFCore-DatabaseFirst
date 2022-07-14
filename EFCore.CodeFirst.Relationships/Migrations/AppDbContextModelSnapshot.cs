@@ -21,7 +21,7 @@ namespace EFCore.CodeFirst.Relationships.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("EFCore.CodeFirst.Relationships.DAL.BasePerson", b =>
+            modelBuilder.Entity("EFCore.CodeFirst.Relationships.DAL.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -29,12 +29,19 @@ namespace EFCore.CodeFirst.Relationships.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Discriminator")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("EFCore.CodeFirst.Relationships.DAL.Person", b =>
+                {
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -44,32 +51,114 @@ namespace EFCore.CodeFirst.Relationships.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Person");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("BasePerson");
+                    b.ToTable("People");
                 });
 
-            modelBuilder.Entity("EFCore.CodeFirst.Relationships.DAL.Employee", b =>
+            modelBuilder.Entity("EFCore.CodeFirst.Relationships.DAL.Product", b =>
                 {
-                    b.HasBaseType("EFCore.CodeFirst.Relationships.DAL.BasePerson");
-
-                    b.Property<decimal>("Salary")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasDiscriminator().HasValue("Employee");
-                });
-
-            modelBuilder.Entity("EFCore.CodeFirst.Relationships.DAL.Manager", b =>
-                {
-                    b.HasBaseType("EFCore.CodeFirst.Relationships.DAL.BasePerson");
-
-                    b.Property<int>("Degree")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.HasDiscriminator().HasValue("Manager");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Barcode")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasPrecision(9, 2)
+                        .HasColumnType("decimal(9,2)");
+
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("EFCore.CodeFirst.Relationships.DAL.ProductFeature", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Height")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Width")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductFeatures");
+                });
+
+            modelBuilder.Entity("EFCore.CodeFirst.Relationships.DAL.ProductFull", b =>
+                {
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Height")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Product_Id")
+                        .HasColumnType("int");
+
+                    b.ToTable("ProductFulls");
+                });
+
+            modelBuilder.Entity("EFCore.CodeFirst.Relationships.DAL.Product", b =>
+                {
+                    b.HasOne("EFCore.CodeFirst.Relationships.DAL.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("EFCore.CodeFirst.Relationships.DAL.ProductFeature", b =>
+                {
+                    b.HasOne("EFCore.CodeFirst.Relationships.DAL.Product", "Product")
+                        .WithOne("ProductFeature")
+                        .HasForeignKey("EFCore.CodeFirst.Relationships.DAL.ProductFeature", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("EFCore.CodeFirst.Relationships.DAL.Category", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("EFCore.CodeFirst.Relationships.DAL.Product", b =>
+                {
+                    b.Navigation("ProductFeature")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

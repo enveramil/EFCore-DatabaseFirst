@@ -11,17 +11,19 @@ namespace EFCore.CodeFirst.Relationships.DAL
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<BasePerson> Person { get; set; }
-        public DbSet<Manager> Managers { get; set; }
+        //public DbSet<Manager> Managers { get; set; }
 
-        public DbSet<Employee> Employees { get; set; }
+        //public DbSet<Employee> Employees { get; set; }
 
+        public DbSet<Person> People { get; set; }
 
-        //public DbSet<Product> Products { get; set; }
+        public DbSet<ProductFull> ProductFulls { get; set; }
 
-        //public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
 
-        //public DbSet<ProductFeature> ProductFeatures { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<ProductFeature> ProductFeatures { get; set; }
 
         //public DbSet<Student> Students { get; set; }
 
@@ -68,6 +70,31 @@ namespace EFCore.CodeFirst.Relationships.DAL
             //modelBuilder.Entity<Product>().Property(x => x.Id).ValueGeneratedOnAdd(); //identity  
 
             //modelBuilder.Entity<Product>().Property(x => x.Price).HasPrecision(18, 2);
+
+            // TPT
+            // ToTable() : Her bir entity'e karşılık birer tablo oluşturmaktadır.
+            //modelBuilder.Entity<BasePerson>().ToTable("PersonTable");
+            //modelBuilder.Entity<Manager>().ToTable("ManagerTable");
+            //modelBuilder.Entity<Employee>().ToTable("EmployeeTable");
+
+
+            // Owned Entity Types with Fluent API
+
+            //modelBuilder.Entity<Manager>().OwnsOne(x => x.Person, p=>
+            //{
+            //    p.Property(x => x.FirstName).HasColumnName("FirstName");
+            //    p.Property(x => x.LastName).HasColumnName("LastName");
+            //    p.Property(x => x.Age).HasColumnName("Age");
+            //});
+            //modelBuilder.Entity<Employee>().OwnsOne(x => x.Person, p=>
+            //{
+            //    p.Property(x => x.FirstName).HasColumnName("FirstName");
+            //    p.Property(x => x.LastName).HasColumnName("LastName");
+            //    p.Property(x => x.Age).HasColumnName("Age");
+            //});
+
+
+            modelBuilder.Entity<ProductFull>().HasNoKey();
             base.OnModelCreating(modelBuilder);
         }
 

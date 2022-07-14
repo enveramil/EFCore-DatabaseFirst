@@ -13,7 +13,8 @@ namespace EFCore.CodeFirst.Relationships.DAL
         public string Name { get; set; }
 
         // null exception engellemek için initialize işlemi yapıldı.
-        public virtual List<Product> Products { get; set; } = new List<Product>();
+        // public virtual işlemi lazy loading de kullanılır.
+        public  List<Product> Products { get; set; } = new List<Product>();
 
         
     }
