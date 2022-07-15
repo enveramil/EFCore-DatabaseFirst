@@ -11,13 +11,16 @@ namespace EFCore.CodeFirst.Relationships.DAL
 {
     public class AppDbContext : DbContext
     {
+
+        //public DbSet<People> People { get; set; }
+
         //public DbSet<Manager> Managers { get; set; }
 
         //public DbSet<Employee> Employees { get; set; }
 
-        public DbSet<Person> People { get; set; }
+        //public DbSet<Person> People { get; set; }
 
-        public DbSet<ProductFull> ProductFulls { get; set; }
+        //public DbSet<ProductFull> ProductFulls { get; set; }
 
         public DbSet<Product> Products { get; set; }
 
@@ -94,7 +97,18 @@ namespace EFCore.CodeFirst.Relationships.DAL
             //});
 
 
-            modelBuilder.Entity<ProductFull>().HasNoKey();
+            //modelBuilder.Entity<ProductFull>().HasNoKey();
+
+
+            //modelBuilder.Entity<Product>().Ignore(product => product.Barcode);
+            //modelBuilder.Entity<Product>().Property(product => product.Name).IsUnicode(false); // varchar
+            //modelBuilder.Entity<Product>().Property(product => product.url).HasColumnType("nvarchar(200)").HasColumnName("ProductUrl");
+
+
+            //modelBuilder.Entity<Product>().HasIndex(x => x.Name).IncludeProperties(x=>new {x.Price,x.Stock,x.Barcode});
+            //modelBuilder.Entity<Product>().HasCheckConstraint("ProductCheckConstraint", "[Price]>[DiscountPrice]");
+
+            //modelBuilder.Entity<Product>().HasIndex(x => new { x.Name, x.Price });
             base.OnModelCreating(modelBuilder);
         }
 

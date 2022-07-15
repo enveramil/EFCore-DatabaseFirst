@@ -8,7 +8,7 @@ namespace EFCore.CodeFirst.Relationships.DAL
 {
     public class ProductFull
     {
-        public int Product_Id { get; set; }
+        public int Id { get; set; }
 
         public string CategoryName { get; set; }
 

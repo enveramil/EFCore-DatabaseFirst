@@ -38,22 +38,6 @@ namespace EFCore.CodeFirst.Relationships.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("EFCore.CodeFirst.Relationships.DAL.Person", b =>
-                {
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("People");
-                });
-
             modelBuilder.Entity("EFCore.CodeFirst.Relationships.DAL.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -68,9 +52,13 @@ namespace EFCore.CodeFirst.Relationships.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("DiscountPrice")
+                        .HasPrecision(9, 2)
+                        .HasColumnType("decimal(9,2)");
+
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("Price")
                         .HasPrecision(9, 2)
@@ -79,9 +67,19 @@ namespace EFCore.CodeFirst.Relationships.Migrations
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
+                    b.Property<string>("url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("Name");
+
+                    b.HasIndex("Price");
+
+                    b.HasIndex("Name", "Price");
 
                     b.ToTable("Products");
                 });
@@ -104,28 +102,6 @@ namespace EFCore.CodeFirst.Relationships.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProductFeatures");
-                });
-
-            modelBuilder.Entity("EFCore.CodeFirst.Relationships.DAL.ProductFull", b =>
-                {
-                    b.Property<string>("CategoryName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Height")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Product_Id")
-                        .HasColumnType("int");
-
-                    b.ToTable("ProductFulls");
                 });
 
             modelBuilder.Entity("EFCore.CodeFirst.Relationships.DAL.Product", b =>

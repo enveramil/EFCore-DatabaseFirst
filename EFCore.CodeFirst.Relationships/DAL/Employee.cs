@@ -11,7 +11,7 @@ namespace EFCore.CodeFirst.Relationships.DAL
     {
         public int Id { get; set; }
 
-        public Person Person { get; set; }
+        //public Person Person { get; set; }
 
         [Precision(18,2)]
         public decimal Salary { get; set; }

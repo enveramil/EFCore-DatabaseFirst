@@ -180,20 +180,76 @@ using (var dbContext = new AppDbContext())
     //dbContext.Categories.Add(category);
     //dbContext.SaveChanges();
 
-    var personList = dbContext.People.ToList();
+    //var personList = dbContext.People.ToList();
 
 
-    var productFulls = dbContext.ProductFulls.FromSqlRaw(
-        @"select p.Id, c.Name 'CategoryName', p.Name, p.Price, pf.Height from Products p 
-        join ProductFeatures pf on p.Id = pf.Id
-        join Categories c on c.Id = p.CategoryId"
+    //var productFulls = dbContext.ProductFulls.FromSqlRaw(
+    //    @"select p.Id, c.Name 'CategoryName', p.Name, p.Price, pf.Height from Products p 
+    //    join ProductFeatures pf on p.Id = pf.Id
+    //    join Categories c on c.Id = p.CategoryId"
 
-        ).ToList();
+    //    ).ToList();
 
-    Console.WriteLine("İşlem bitti...");
+    //Console.WriteLine("İşlem bitti...");
 
 
+    //dbContext.Products.Where(x => x.Name == "Enver").Select(x => new { name = x.Name, price = x.Price,
+    //    stock = x.Stock, barcode = x.Barcode 
+    //});
 
+    //dbContext.Products.Add(new Product { Name = "Kalemler", Price = 100, DiscountPrice = 80, Barcode = 123, Stock = 1234, url="abc" });
+
+    //dbContext.SaveChanges();    
+
+
+    //dbContext.People.Add(new People() { Name = "Enver", PhoneNumber = "05551535333" });
+    //dbContext.People.Add(new People() { Name = "Kemal", PhoneNumber = "05362231414" });
+
+    //dbContext.SaveChanges();
+
+    //var getNumber = dbContext.People.ToList().Where(x => formatPhoneNumber(x.PhoneNumber) == "5551535333").ToList();
+
+    //var formatData = dbContext.People.ToList().Select(x => new { name = x.Name, phoneNumber = formatPhoneNumber(x.PhoneNumber) }).ToList();
+
+    //formatData.ForEach(x =>
+    //{
+    //    Console.WriteLine($"Name: {x.name}, Phone: {x.phoneNumber}");
+    //});
+
+    //Console.WriteLine("İşlem bitti...");
+
+
+    //var addCategoryAndProducts = new Category() { Name = "kalemler" , };
+
+    ////addCategoryAndProducts.Products.Add(new() { Name = "Kalem1", Price = 20, Stock = 3, Barcode = 1234, 
+    ////    DiscountPrice = 10, url = "kalem.com" });
+
+    //addCategoryAndProducts.Products.Add(new()
+    //{
+    //    Name = "Kalem53",
+    //    Price = 53,
+    //    Stock = 53,
+    //    Barcode = 5353,
+    //    DiscountPrice = 35,
+    //    url = "kalem53.com",
+    //    ProductFeature = new ProductFeature() { Color="red53", Height=53, Width=53},
+    //    Category = addCategoryAndProducts
+    //});
+
+    //dbContext.Categories.Add(addCategoryAndProducts);
+
+    //dbContext.Categories.Update(addCategoryAndProducts);
+
+   
+
+    var category = dbContext.Categories.Where(x=>x.Id == 3).First(); 
+    var addProduct = new Product() { Name="Enver", Price=1, Stock=1, Barcode=1, url="ee", DiscountPrice=1,
+         CategoryId = category.Id
+    };
+
+    dbContext.Add(addProduct);
+
+    dbContext.SaveChanges();
 
 
 
@@ -202,3 +258,8 @@ using (var dbContext = new AppDbContext())
 
 
 }
+
+//string formatPhoneNumber(string phone)
+//{
+//    return phone.Substring(1, phone.Length - 1);
+//}

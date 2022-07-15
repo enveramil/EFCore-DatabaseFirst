@@ -16,7 +16,7 @@ namespace EFCore.CodeFirst.Relationships.DAL
 
         // Navigation Property
         // null hatası almamak için initialize edildi.
-        public List<Teacher> Teachers { get; set; } = new();
+        //public List<Teacher> Teachers { get; set; } = new();
 
     }
 }
