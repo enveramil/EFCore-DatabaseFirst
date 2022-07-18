@@ -419,16 +419,20 @@ using (var dbContext = new AppDbContext())
     //    .Include(x => x.ProductFeature).Where(y => y.Price > 30).ToList();
 
 
-    var product = dbContext.Products.First(x=>x.Id==8);
+    //var product = dbContext.Products.First(x=>x.Id==8);
 
-    product.Price = 17500;
+    //product.Price = 17500;
 
     // DB de değişiklik olduğunu state ile belirtebiliriz.
     //dbContext.Entry(product).State = EntityState.Modified;
 
-    dbContext.Update(product);
+    //dbContext.Update(product);
 
-    dbContext.SaveChanges();    
+    //dbContext.SaveChanges();    
+
+    var categories = dbContext.Categories.ToList();
+
+
 
     Console.WriteLine("point");
 
