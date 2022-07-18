@@ -1,4 +1,5 @@
-﻿using FluentAssertions.Common;
+﻿using EFCore.CodeFirst.Relationships.Models;
+using FluentAssertions.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -11,6 +12,25 @@ namespace EFCore.CodeFirst.Relationships.DAL
 {
     public class AppDbContext : DbContext
     {
+        //private readonly int Barcode;
+        //public AppDbContext()
+        //{
+
+        //}
+        //public AppDbContext(int barcode)
+        //{
+        //    Barcode = barcode;
+        //}
+
+        
+
+        public DbSet<Product> Products { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<ProductFeature> ProductFeatures { get; set; }
+
+        //public DbSet<ProductAndProductFeatures> ProductAndProductFeatures { get; set; }
 
         //public DbSet<People> People { get; set; }
 
@@ -22,18 +42,16 @@ namespace EFCore.CodeFirst.Relationships.DAL
 
         //public DbSet<ProductFull> ProductFulls { get; set; }
 
-        public DbSet<Product> Products { get; set; }
+        //public DbSet<ProductEssential> ProductEssentials { get; set; }
 
-        public DbSet<Category> Categories { get; set; }
-
-        public DbSet<ProductFeature> ProductFeatures { get; set; }
+        //public DbSet<ProductWithFeature> ProductWithFeatures { get; set; }
 
         //public DbSet<Student> Students { get; set; }
 
         //public DbSet<Teacher> Teachers { get; set; }
 
+       
         public AppDbContext() { }
-
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -42,7 +60,10 @@ namespace EFCore.CodeFirst.Relationships.DAL
             // .LogTo(Console.WriteLine,Microsoft.Extensions.Logging.LogLevel.Information).UseLazyLoadingProxies()
 
             DbContextInitializer.Build();
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-DB9C9K6\\SQLEXPRESS;Initial Catalog=CodeFirstRelationships;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            optionsBuilder.LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information)
+                .UseSqlServer(
+                "Data Source=DESKTOP-DB9C9K6\\SQLEXPRESS;Initial Catalog=CodeFirstRelationships;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
+                ).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -109,6 +130,31 @@ namespace EFCore.CodeFirst.Relationships.DAL
             //modelBuilder.Entity<Product>().HasCheckConstraint("ProductCheckConstraint", "[Price]>[DiscountPrice]");
 
             //modelBuilder.Entity<Product>().HasIndex(x => new { x.Name, x.Price });
+
+            //modelBuilder.Entity<ProductEssential>().HasNoKey().ToSqlQuery("select Name, Price from products");
+            //modelBuilder.Entity<ProductWithFeature>().HasNoKey();
+
+
+            //modelBuilder.Entity<ProductAndProductFeatures>().HasNoKey().ToView("productAndProductFeatures");
+
+
+            // IsDeleted sütununa default değer olarak false verdik ve queryfilter ile false olanları çektik.
+
+
+            //if (Barcode != default(int))
+            //{
+            //    modelBuilder.Entity<Product>().HasQueryFilter(p => p.IsDeleted == false);
+            //    modelBuilder.Entity<Product>().HasQueryFilter(p => p.Barcode == Barcode);
+            //}
+            //else
+            //{
+            //    modelBuilder.Entity<Product>().HasQueryFilter(p => p.Stock > 3);
+            //}
+
+            //modelBuilder.Entity<Product>().Property(x => x.IsDeleted).HasDefaultValue(false);
+            
+            
+            
             base.OnModelCreating(modelBuilder);
         }
 

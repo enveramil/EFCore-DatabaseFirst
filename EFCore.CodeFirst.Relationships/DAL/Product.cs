@@ -30,6 +30,9 @@ namespace EFCore.CodeFirst.Relationships.DAL
 
         public int Barcode { get; set; }
 
+        public bool IsDeleted { get; set; }
+
+
         //[DatabaseGenerated(DatabaseGeneratedOption.Computed)] // update sorgularında dahil etmez.
         //public DateTime? CreatedDate { get; set; } = DateTime.Now;
 

@@ -4,8 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 DbContextInitializer.Build();
 
+
+
+
 using (var dbContext = new AppDbContext())
-{
+    {
 
     //var brand = new Category() { Name = "Volkswagen", CarModel = new List<Product>()
     //{
@@ -240,26 +243,205 @@ using (var dbContext = new AppDbContext())
 
     //dbContext.Categories.Update(addCategoryAndProducts);
 
-   
-
-    var category = dbContext.Categories.Where(x=>x.Id == 3).First(); 
-    var addProduct = new Product() { Name="Enver", Price=1, Stock=1, Barcode=1, url="ee", DiscountPrice=1,
-         CategoryId = category.Id
-    };
-
-    dbContext.Add(addProduct);
-
-    dbContext.SaveChanges();
 
 
+    //var category = dbContext.Categories.Where(x=>x.Id == 3).First(); 
+    //var addProduct = new Product() { Name="Enver", Price=1, Stock=1, Barcode=1, url="ee", DiscountPrice=1,
+    //     CategoryId = category.Id
+    //};
+
+    //dbContext.Add(addProduct);
+
+    //dbContext.SaveChanges();
 
 
 
+    #region Join
 
+    //var result = (from c in dbContext.Categories
+    //              join p in dbContext.Products on c.Id equals p.CategoryId
+    //              select new
+    //              {
+    //                  CategoryName = c.Name,
+    //                  ProductName = p.Name,
+    //                  ProductPrice = p.Price,
+    //              }).ToList();
+    //Console.WriteLine("finish");
+
+
+    //var onlyId = (from p in dbContext.Products
+    //             where p.CategoryId == 3 select p).ToList();
+
+    //Console.WriteLine("finish");
+
+
+    //var result = dbContext.Categories
+    //    .Join(dbContext.Products, c => c.Id, p => p.CategoryId, (c, p) => new { c, p })
+    //    .Join(dbContext.ProductFeatures, x => x.p.Id, y => y.Id, (c, pf) => new
+    //    {
+    //        CategoryName = c.c.Name,
+    //        ProductName = c.p.Name,
+    //        ProductFeatureColor = pf.Color
+    //    });
+
+
+    //var result2 = (from c in dbContext.Categories
+    //              join p in dbContext.Products on c.Id equals p.CategoryId
+    //              join pf in dbContext.ProductFeatures on p.Id equals pf.Id
+    //              select new { c, p, pf }).ToList();
+
+    //result2.ForEach(x =>
+    //{
+    //    Console.WriteLine($"CategoryName: {x.c.Name}, ProductName: {x.p.Name}, ProductFeatureColor: {x.pf.Color}");
+    //});
+
+
+
+    //var leftJoinResult = await (from p in dbContext.Products
+    //                    join pf in dbContext.ProductFeatures on p.Id equals pf.Id into pfList
+    //                    from pf in pfList.DefaultIfEmpty()
+    //                    select new { p }
+
+    //              ).ToListAsync();
+
+
+    //var rightJoinResult = await (from pf in dbContext.ProductFeatures
+    //                            join p in dbContext.Products on pf.Id equals p.Id into pList
+    //                            from p in pList.DefaultIfEmpty()
+    //                            select new { p }
+
+    //              ).ToListAsync();
+
+
+    //var left = (from product in dbContext.Products
+    //            join productFeature in dbContext.ProductFeatures on product.Id equals productFeature.Id into pfList
+    //            from productFeature in pfList.DefaultIfEmpty()
+    //            select new { 
+    //                Id = product.Id,
+    //                Name = product.Name,
+    //                Color = productFeature.Color == null ? 5 : 0
+    //            }).ToList();
+
+    //var right = (from productFeature in dbContext.ProductFeatures
+    //            join product in dbContext.Products on productFeature.Id equals product.Id into pfList
+    //            from product in pfList.DefaultIfEmpty()
+    //            select new
+    //            {
+    //                Id = product.Id,
+    //                Name = product.Name,
+    //                Color = productFeature.Color == null ? 5 : 0
+    //            }).ToList();
+
+    //// Union(): İki listeyi birleştirir.
+    //var outerJoin = left.Union(right);
+
+    //outerJoin.ToList().ForEach(x =>
+    //{
+    //    Console.WriteLine($"Id: {x.Id}, Name: {x.Name}, Color: {x.Color}");
+
+    //}); 
+    #endregion
+
+    #region RawSqlAndFromSql
+    //decimal price = 30;
+    //var id = 3;
+
+    //var products = await dbContext.Products.FromSqlRaw("select * from products").ToListAsync();
+
+
+    //var product = await dbContext.Products.FromSqlRaw("select * from products where Id={0}",id).FirstAsync();
+
+    //var getPrice = await dbContext.Products.FromSqlRaw("select * from products where Price>{0}",price).ToListAsync();
+
+    //var getData = await dbContext.Products.FromSqlInterpolated($"select * from products where Price>{price}").ToListAsync();
+
+    //var data = await dbContext.ProductEssentials.FromSqlRaw("select Name,Price from products").ToListAsync();
+
+    //var productFeature = await dbContext.ProductWithFeatures.FromSqlRaw(@"select p.Id, p.Name, p.Price, pf.Color, pf.Height from Products p
+    //inner join ProductFeatures pf on p.Id = pf.Id").ToListAsync();
+
+    //productFeature.ForEach(x =>
+    //{
+    //    Console.WriteLine($"Name: {x.Name}, Price: {x.Price}, Color: {x.Color}, Height: {x.Height}");
+    //});
+
+    //Console.WriteLine("finish...");
+
+
+    //var products = dbContext.ProductEssentials.Where(x=>x.Price>30).ToList();
+
+    //var productAndProductsFeature = dbContext.ProductAndProductFeatures.Where(x=>x.Name=="Kalem53").ToList(); 
+    #endregion
+
+
+    #region Pagination
+    // PAGINATION
+    // Take(10) : İlk 10 veriyi al
+    // Skip(2)  : 2 atla datayı al
+
+    //GetProducts(1, 3, dbContext).ForEach(x =>
+    //{
+    //    Console.WriteLine($"{x.Name}, {x.Price}");
+    //}); 
+    #endregion
+
+
+
+    //var category = new Category() { Name = "Telefonlar" };
+
+    //category.Products.Add(new()
+    //{
+    //    Name = "Iphone11",
+    //    Price = 16000,
+    //    DiscountPrice = 15000,
+    //    Stock = 24,
+    //    Barcode = 19980505,
+    //    url = "apple.com",
+    //    ProductFeature = new ProductFeature()
+    //    {
+    //        Color = "Red",
+    //        Width = 100,
+    //        Height = 100
+
+    //    }
+
+    //});
+
+    //dbContext.Categories.Add(category);
+    //dbContext.SaveChanges();
+
+
+    // IgnoreQueryFilters() : Global Query iptal işlemi gerçekleştirilir.
+
+    //var products = dbContext.Products.ToList();
+
+    //var productsWithFeature = dbContext.Products.TagWith("Product ve ProductFeature Tabloları")
+    //    .Include(x => x.ProductFeature).Where(y => y.Price > 30).ToList();
+
+
+    var product = dbContext.Products.First(x=>x.Id==8);
+
+    product.Price = 17500;
+
+    // DB de değişiklik olduğunu state ile belirtebiliriz.
+    //dbContext.Entry(product).State = EntityState.Modified;
+
+    dbContext.Update(product);
+
+    dbContext.SaveChanges();    
+
+    Console.WriteLine("point");
 
 }
+
+
 
 //string formatPhoneNumber(string phone)
 //{
 //    return phone.Substring(1, phone.Length - 1);
+//}
+
+//static List<Product> GetProducts(int page, int pageSize, AppDbContext dbContext)
+//{
+//    return dbContext.Products.OrderByDescending(x => x.Id).Skip((page - 1) * pageSize).Take(pageSize).ToList();
 //}

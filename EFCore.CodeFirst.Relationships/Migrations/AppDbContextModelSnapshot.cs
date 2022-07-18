@@ -56,6 +56,11 @@ namespace EFCore.CodeFirst.Relationships.Migrations
                         .HasPrecision(9, 2)
                         .HasColumnType("decimal(9,2)");
 
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
