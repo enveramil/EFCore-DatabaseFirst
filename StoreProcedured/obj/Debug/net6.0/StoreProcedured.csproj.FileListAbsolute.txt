@@ -65,3 +65,4 @@ C:\Users\Enver\source\repos\EFCore\StoreProcedured\obj\Debug\net6.0\StoreProcedu
 C:\Users\Enver\source\repos\EFCore\StoreProcedured\obj\Debug\net6.0\StoreProcedured.genruntimeconfig.cache
 C:\Users\Enver\source\repos\EFCore\StoreProcedured\obj\Debug\net6.0\ref\StoreProcedured.dll
 C:\Users\Enver\source\repos\EFCore\StoreProcedured\bin\Debug\net6.0\appsettings.json
+C:\Users\Enver\source\repos\EFCore\StoreProcedured\bin\Debug\net6.0\AutoMapper.dll
